@@ -36,6 +36,9 @@ public class RUDPClient : MonoBehaviour
     private void SendPacketHandle(byte[] packet)
     {
         udpClient.Send(packet, packet.Length, endPoint);
+       
+        string message = System.Text.Encoding.UTF8.GetString(packet);
+        Debug.Log("Send to Server: " + message);
     }
 
 #endregion
@@ -48,7 +51,6 @@ public class RUDPClient : MonoBehaviour
         byte[] sendData = System.Text.Encoding.UTF8.GetBytes(message);
         byte[] packet = AttachSequenceToPacket(sendData);
         SendPacketHandle(packet);
-        Debug.Log("Send to Server: " + message);
     }
 
     // attach sequence number to packet
